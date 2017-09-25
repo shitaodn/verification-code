@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		#code {
+			font-family: arial;
+			font-size: 20px;
+			border: 0;
+			color: red;
+			letter-spacing: 5px;
+		}
+	</style>
+</head>
+<body>
+	<input type="text" id="txt" />
+	<!-- 验证码 -->
+	<input type="button" id="code" onclick="createCode()"/>
+	<!-- 按钮 -->
+	<input type="button" id="btn" onclick="validate()" value="验证" />
+
+	<script type="text/javascript">
+		var code;
+		function createCode(){
+			code="";
+			//验证码长度
+			var codeLength = 4;
+			var checkCode = document.getElementById('code');
+			//生成一个随机的验证码
+
+
+			//new 出一个数组
+			var random = new Array(0,1,2,3,4,5,6,7,8,9,'A','B','C','D','Q','W','E','R','T','Y','U','I','O','P','S','F','G','H','J','K','L','Z','X','V','N','M');
+			for(var i=0; i<codeLength; i++){
+				//循环操作
+				var index = Math.floor(Math.random()*random.length);
+				//取得随机数的索引值（0-35）
+				//验证码加上随机数的index
+				code+=random[index];
+				//根据索引值取得随机数值添加到code
+			}
+			checkCode.value = code;
+			// 把值赋给验证码；
+			
+		}
+		createCode();
+			//按钮验证
+		function validate(){
+			//toUppercase
+			var inputCode = document.getElementById("txt").value.toUpperCase();
+			if(inputCode.length<=0){
+				alert("请输入验证码");
+			}
+			else if(inputCode.length != code){
+				alert("验证码输入错误");
+				createCode();
+				document.getElementById("txt").value = "";
+			}
+			else {
+				alert("输入正确");
+			}
+		}
+	</script>
+</body>
+</html>
